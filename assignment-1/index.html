@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        sumRange = function (n){
+            if(n == 1){
+                return n;
+            }else{
+                return  n + sumRange(n -1);
+            }
+
+        }
+
+        power = function(n, p){
+            if(p == 0){
+                return 1;
+            }
+            else{
+                return n * power(n, p-1);
+            }
+        }
+
+        factorial = function(n){
+            if(n == 1 || n == 0){
+                return 1;
+            }else{
+                return n * factorial(n-1);
+            }
+        }
+
+        const isGreaterThanZero = (num) => num > 0;
+        all = function(arr, callback){
+            if(arr.length === 0){
+                return true;
+            }
+
+            const firstElement = callback(arr[0]);
+
+            return firstElement && all(arr.slice(1), callback);
+        }
+
+        arrayProduct = function(arr){
+            if(arr.length === 0){
+                return 1;
+            } else{
+                const firstElement = arr[0];
+                return firstElement * arrayProduct(arr.slice(1));
+            }
+        }
+
+        let nestedObject = {
+            data: {
+                info: {
+                    stuff: {
+                        thing: {
+                            moreStuff: {
+                                magicNumber: 44,
+                                something: 'foo2'
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        contains = function(nestedObject, value){
+           
+            for (let key in nestedObject){
+                if(nestedObject.hasOwnProperty(key)){
+                    const val = nestedObject[key];
+                    if(typeof val === 'object'){       
+                        if(contains(val, value)){
+                            return true;
+                        };
+                    } else{
+                         
+                        if(val == value){
+                            return true;
+                           
+                        }
+                    }
+                }
+               
+            }
+            return false;
+        }
+        let  mixedArray = ([[[5], 3], 0, 2, ['foo'], [], [4, [5, 6]]]); // 7
+        totalIntegers = function(array){
+            let counter = 0;
+            for(element in array){
+                if(array.hasOwnProperty(element)){
+                    arrayElement = array[element];
+                    if(typeof arrayElement == 'object') {
+                        counter += totalIntegers(arrayElement);
+                    } else if(typeof arrayElement == 'number'){
+                        counter ++;
+                    }
+                }
+            }
+            return counter
+        }
+
+        sumSquares = function(array){
+            let counter = 0;
+            for(element in array){
+                if(array.hasOwnProperty(element)){
+                    const arrayElement = array[element] 
+                    if(typeof arrayElement === 'object'){
+                        counter += sumSquares(arrayElement);
+                    } else{
+                        counter += (arrayElement*arrayElement);
+                    }
+                }
+               
+            }
+            return counter;
+            
+        }
+
+        replicate = function(times, n){
+            if(times > 0){
+                return n.toString() + replicate(times -1, n);
+            }  else{
+                return '';
+            }
+        } 
+
+        fibonacci = function(n){
+            let arr = [];
+            let n1 = 0, n2 = 1;
+            for(let i = 0; i < n; i++){
+                arr.push(n1);
+                let temp = n1;
+                n1 = n2;
+                n2 = temp + n2;
+            }
+            return arr;
+        }
+        fibonacciRecursive = function(n){
+            
+            if(n < 2){
+                return n;
+            }else{
+                return fibonacciRecursive(n-1) + fibonacciRecursive(n-2);
+            } 
+            
+            
+        }
+
+        console.log(sumRange(10));
+        console.log(power(2, 5));
+        console.log(factorial(5));
+        console.log(all([0,2,3], isGreaterThanZero));
+        console.log(arrayProduct([4,2,3]));
+        console.log(contains(nestedObject, 44));
+        console.log(totalIntegers(mixedArray));
+        console.log(sumSquares([10,[[10],10],[10]]))
+        console.log(replicate(3, 5));
+        console.log(fibonacci(8))
+        console.log(fibonacciRecursive(8))
+
+    </script>
+</body>
+</html>
