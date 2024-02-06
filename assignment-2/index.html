@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function mergeSort(arr) {
+            if(arr.length == 1) return arr;
+            let mid = Math.floor(arr.length/2)
+            let leftArr = mergeSort(arr.slice(0, mid));
+            let rightArr = mergeSort(arr.slice(mid));
+
+            let result = merge(leftArr, rightArr)
+            return result;
+           
+        }
+
+        function merge(leftArr, rightArr) { 
+            let result = [];
+            let leftIndex = 0;
+            let rightIndex = 0;
+            while(leftIndex < leftArr.length && rightIndex < rightArr.length){
+                if(leftArr[leftIndex] > rightArr[rightIndex]){
+                    result.push(leftArr[leftIndex])
+                    leftIndex++;
+                } else{
+                    result.push(rightArr[rightIndex])
+                    rightIndex++;
+                }
+            } 
+
+            while(leftIndex < leftArr.length){
+                result.push(leftArr[leftIndex]);
+                leftIndex++;
+            }
+            while(rightIndex < rightArr.length){
+                result.push(rightArr[rightIndex]);
+                rightIndex++;
+            }
+            return result;
+        }
+
+
+        /**
+        *  Serach for the min
+        *  Add the min to the sorted array
+        *  Swap  the min for the first element
+        */  
+
+        function selectionSort(arr) {
+            for (let i = 0; i < arr.length; i++) {
+                let lowest = i
+                for (let j = i + 1; j < arr.length; j++) {
+                if (arr[j] < arr[lowest]) {
+                    lowest = j
+                }
+                }
+                if (lowest !== i) {
+                // Swap
+                let temp = arr[i];
+                arr[i] = arr[lowest];
+                arr[lowest] = temp;
+                }
+            }
+            return arr
+        }
+
+ 
+        console.log(selectionSort([3, 45, 2, 1, 13]));
+
+        console.log(mergeSort([3, 2, 1, 13, 8, 5, 0, 1]));
+    </script>
+</body>
+</html>
